@@ -5,12 +5,14 @@ import {
   Text,
   TextInput,
   ImageBackground,
+  Button,
 } from "react-native";
-import Context from "../context/BlogContext";
+import { Context } from "../context/BlogContext";
 
-const CreateScreen = () => {
+const CreateScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { addBlogPost } = useContext(Context);
 
   return (
     <ImageBackground
@@ -38,7 +40,15 @@ const CreateScreen = () => {
           <TextInput
             style={styles.input}
             value={content}
-            onChangeText={(text) => seContent(text)}
+            onChangeText={(text) => setContent(text)}
+          />
+          <Button
+            title="Add Blog Post"
+            onPress={() => {
+              addBlogPost(title, content, () => {
+                navigation.navigate("Index")
+              });
+            }}
           />
         </View>
       </View>

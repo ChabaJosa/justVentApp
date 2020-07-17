@@ -17,25 +17,26 @@ const IndexScreen = ({ navigation }) => {
 
   return (
     <>
-      <View>
+      <View style={styles.container}>
         <ImageBackground
           source={require("../../assets/img/back1.png")}
           style={{
             height: 605,
             overflow: "hidden",
+            opacity: 0.7,
+            backgroundColor: "grey",
           }}
           imageStyle={{
             resizeMode: "cover",
             top: undefined,
           }}
         >
-          <Button title="Add Post" onPress={() => addBlogPost()} />
           {/* <AwesomeButton> */}
-            {/* <Image
+          {/* <Image
               source="require('send-icon.png')" */}
-              {/* // source={require("../../assets/img/back1.png")} */}
-            {/* /> */}
-            {/* <Text>Add Post</Text> */}
+          {/* // source={require("../../assets/img/back1.png")} */}
+          {/* /> */}
+          {/* <Text>Add Post</Text> */}
           {/* </AwesomeButton> */}
           <FlatList
             data={state}
@@ -78,6 +79,12 @@ IndexScreen.navigationOptions = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    // flex: -1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // backgroundColor: 'grey',
+  },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     margin: 1,
-    borderColor: "gray",
+    borderColor: "white",
   },
   icon: {
     fontSize: 24,
@@ -93,7 +100,7 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   text: {
     fontFamily: "AvenirNext-Regular",
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
     textShadowColor: "rgba(0, 0, 0, 0.75)",
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 });
 
