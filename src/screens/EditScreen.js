@@ -1,20 +1,20 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Context } from "../context/BlogContext";
+import BlogPostForm from "../components/BlogPostForm";
 
 export default function EditScreen({ navigation }) {
-  const { state } = useContext(Context);
-  const blogPost = state.find(
-    (blogPost) => blogPost.id === navigation.getParam("id")
-  );
 
-  const [title, setTitle] = useState(blogpost.title)
-  const [content, setContent] = useState(blogpost.content)
+  const id = navigation.getParam("id");
+  const { state, updatePost } = useContext(Context);
+  const blogPost = state.find((blogPost) => blogPost.id === id);
+
   return (
-    <>
-      <View>
-        <Text>Edit Screen - {navigation.getParam("id")}</Text>
-      </View>
-    </>
+    <BlogPostForm
+      initialValues={{ title: blogPost.title, content: blogPost.content }}
+      onSubmit={(title, content) => {
+        console.log(id, title, content);
+        updatePost(id, title, content,  () => navigation.pop());
+      }}
+    />
   );
 }
