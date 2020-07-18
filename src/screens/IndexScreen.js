@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,7 +13,10 @@ import { Feather } from "@expo/vector-icons";
 import AwesomeButton from "react-native-really-awesome-button";
 
 const IndexScreen = ({ navigation }) => {
-  const { state, addBlogPost, deletePost } = useContext(Context);
+  const { state, deletePost, getBlogPosts } = useContext(Context);
+
+  useEffect(() => {getBlogPosts()}, [])
+  
 
   return (
     <>
