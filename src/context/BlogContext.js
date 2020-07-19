@@ -1,5 +1,6 @@
 import createDataContext from "./createDataContext";
-import jsonServer from "../api/jsonServer"
+// import jsonServer from "../api/jsonServer"
+import axios from "axios"
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -27,16 +28,17 @@ const blogReducer = (state, action) => {
 };
 
 const getBlogPosts = dispatch => {
-  return async () => {
-    try {
+  return () => {
 
-      const response = await jsonServer.get("/blogposts")
-      dispatch({type: "get_blogposts", payload: response.data})
-    } 
-    catch (err) {
-        console.log("Error here----------------------------------------------------",err)
-    }
-    // response.data === [{}, {}, {}]
+      // let response =  jsonServer.get("/blogposts")
+      // console.log(response, "<---------- Response here")
+      // dispatch({type: "get_blogposts", payload: response.data})
+
+      axios.get(`http://ad506c093914.ngrok.io/blogposts`)
+        .then(response => {
+          dispatch({type: "get_blogposts", payload: response.data})
+        })
+        .catch(error => console.log("Can't access Api  ---> ", error))
 
   }
 }
