@@ -15,8 +15,19 @@ import AwesomeButton from "react-native-really-awesome-button";
 const IndexScreen = ({ navigation }) => {
   const { state, deletePost, getBlogPosts } = useContext(Context);
 
-  useEffect(() => {getBlogPosts()}, [])
-  
+  useEffect(() => {
+    // First time you go to index
+    getBlogPosts();
+    // Every time you return to index 
+    navigation.addListener('didFocus', () => {
+      getBlogPosts();
+    })
+
+    // Removes listener to prevent memory leak
+    return () => {
+      listener.remove()
+    }
+  }, []);
 
   return (
     <>
